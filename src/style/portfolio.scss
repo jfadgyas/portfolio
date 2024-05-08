@@ -1,0 +1,59 @@
+@import 'common';
+
+.portfolio{
+    @include section(transparent);
+    background: url('../../public/portfolio_bg.jpg');
+    &__list{
+        @extend %list;
+        display: flex;
+        place-content: center;
+        gap: 0.45em;
+        flex-wrap: wrap;
+    }
+    &__item{
+        display: flex;
+        flex-direction: column;
+        place-items: center;
+        place-content: center;
+        width: 5.6em;
+        padding: 0.4em 0 0 0;
+        transition: 300ms;
+        scale: 0;   
+    }
+    &__icon{
+        @include icon;
+    }
+}
+
+// For mobile support targeting the card class in card.scss
+.card__item.hover{
+    & .portfolio__item{
+        @for $itemCount from 1 to 9{
+            &:nth-child(#{$itemCount}){
+                transition-delay: $itemCount * 100ms;
+                scale: 1;
+            }
+        }
+    }
+}
+
+// Media queries
+@media screen and (width > 400px) {
+    .portfolio{
+        @include media(flex-start, 400);
+    }
+}
+
+@media screen and (width > 1000px) {
+    .portfolio{
+        &__wrapper{
+            // padding-block: 2em;
+        }
+        &__title{
+            font-size: 48px;
+        }
+        &__desc{
+            font-size: 28px;
+        }
+    }
+}

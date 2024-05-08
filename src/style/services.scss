@@ -1,0 +1,25 @@
+@import './common';
+
+.services{
+    @include section(url('../../public/services_bg.jpg'));
+}
+
+@media screen and (width > 400px) {
+    .services{
+        @include media(flex-start, 400);
+    }
+}
+
+@media screen and (width > 1000px) {
+    .services{
+        &__wrapper{
+            padding-block: 2em;
+        }
+        &__title{
+            font-size: 48px;
+        }
+        &__desc{
+            font-size: 28px;
+        }
+    }
+}

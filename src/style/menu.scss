@@ -1,0 +1,84 @@
+@import 'common';
+
+.menu{
+    position: fixed;
+    top: 0;
+    right: 2.5em;
+    z-index: 100;
+    transition: 300ms;
+    font-family: $main-font;
+    font-size: $main-font-size;
+
+    // Background
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid transparent;
+    border-image: linear-gradient(-70deg, white, 20%, transparent, transparent, 85%, white) 1;
+
+    &.open,
+    &:hover{
+        .menu__list{
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: min-content 1fr 1fr;
+        }
+        .menu__item{
+            @for $itemCount from 1 to 9{
+                &:nth-child(#{$itemCount}){
+                    transition-delay: $itemCount * 100ms;
+                    scale: 1;
+                }
+            }
+        }
+        .menu__burger .menu__icon{
+            &:last-child{
+                display: block;
+            }
+            &:first-child{
+                display: none;
+            }
+        }
+    }
+
+    &__list{
+        @extend %list;
+        display: grid;
+        grid-template-columns: 0fr 1fr;
+        grid-template-rows: min-content 0fr 0fr;
+        transition: 300ms;
+    }
+
+    &__item{
+        overflow: hidden;
+        scale: 0;
+        transition: scale 300ms;
+        &:first-child{
+            grid-column: 2 / -1;
+            scale: 1;
+        }
+    }
+
+    &__burger{
+        display: flex;
+        place-content: center;
+        cursor: pointer;
+        & .menu__icon{
+            &:last-child{
+                display: none;
+            }
+        }
+    }
+
+    &__link{
+        @extend %link;
+        display: flex;
+        flex-direction: column;
+        place-items: center;
+        gap: 0.5em;
+        padding: 1em;
+    }
+
+    &__icon{
+        width: 2rem;
+        color: var(--accent-color);
+    }
+}

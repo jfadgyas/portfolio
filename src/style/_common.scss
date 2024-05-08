@@ -1,0 +1,139 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+$main-font: 'Poppins', sans-serif;
+$main-font-size: 16px;
+    
+// Colors
+:root{
+    --home-color: #aed3f2;
+    --home-text: #3A5070;
+    --primary-color: #00254e;
+    --secondary-color: #00abf0;
+    --text-color: #f2f2f2;
+    --accent-color: coral;
+    --extra-color: #d431ad;
+    --selection-color: #8798B0;
+}
+
+// Body / html defaults
+body{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background: var(--primary-color);
+    color: var(--text-color);
+}
+
+// Page / section defaults
+@mixin section($background){
+    padding: 0;
+    background: linear-gradient(var(--primary-color), var(--secondary-color));
+    font-family: $main-font;
+    font-size: $main-font-size;
+    &__wrapper{
+        position: relative;
+        padding-block: 2em;
+        background: var(--dark-background);
+        &::before{
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: $background;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+        }
+    }
+    &__title{
+        padding-inline: 1rem;
+        background: rgba(255, 255, 255, 0.5);
+        color: black;
+        text-transform: uppercase;
+        font-size: 32px;
+        mix-blend-mode: screen;
+    }
+    &__desc{
+        position: relative;
+        padding-inline: 1rem;
+        text-align: justify;
+    }
+    &__callout{
+        padding-bottom: 2em;
+        display: flex;
+        flex-direction: column;
+        place-items: center;
+    }
+    &__summary{
+        margin: 1em;
+        text-align: justify;
+    }
+    &__strong{
+        font-weight: bold;
+    }
+    &__action{
+        @extend %link;
+        padding: 1em;
+        background: var(--extra-color);
+        text-transform: uppercase;
+        &:hover{
+            color: inherit;
+            scale: 1.1;
+        }
+    }
+    & *::selection{
+        color: var(--selection-color);
+    }
+}
+
+// Media for header and title
+@mixin media($alignment, $size){
+    &__detail-wrapper{
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    &__wrapper{
+        display: flex;
+        flex-direction: column;
+        place-items: $alignment;
+        place-content: center;
+    }
+    &__title,
+    &__desc{
+        width: 50%;
+        @if $alignment == flex-end{
+            padding-inline: 0 1rem;
+        }
+        @else {
+            padding-inline: 1rem 0;
+        }
+    }
+}
+
+// List defaults
+%list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+// Link defaults
+%link{
+    color: inherit;
+    text-decoration: none;
+    transition: 300ms;
+    &:hover{
+        color: var(--extra-color);
+    }
+}
+
+// Icon sizes
+@mixin icon{
+    width: 1em;
+    &--large{
+        width: 2em;
+    }
+}

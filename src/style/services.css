@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+:root {
+  --home-color: #aed3f2;
+  --home-text: #3A5070;
+  --primary-color: #00254e;
+  --secondary-color: #00abf0;
+  --text-color: #f2f2f2;
+  --accent-color: coral;
+  --extra-color: #d431ad;
+  --selection-color: #8798B0;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background: var(--primary-color);
+  color: var(--text-color);
+}
+
+.services__action {
+  color: inherit;
+  text-decoration: none;
+  transition: 300ms;
+}
+.services__action:hover {
+  color: var(--extra-color);
+}
+
+.services {
+  padding: 0;
+  background: linear-gradient(var(--primary-color), var(--secondary-color));
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+}
+.services__wrapper {
+  position: relative;
+  padding-block: 2em;
+  background: var(--dark-background);
+}
+.services__wrapper::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url("../../public/services_bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+}
+.services__title {
+  padding-inline: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  color: black;
+  text-transform: uppercase;
+  font-size: 32px;
+  mix-blend-mode: screen;
+}
+.services__desc {
+  position: relative;
+  padding-inline: 1rem;
+  text-align: justify;
+}
+.services__callout {
+  padding-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+.services__summary {
+  margin: 1em;
+  text-align: justify;
+}
+.services__strong {
+  font-weight: bold;
+}
+.services__action {
+  padding: 1em;
+  background: var(--extra-color);
+  text-transform: uppercase;
+}
+.services__action:hover {
+  color: inherit;
+  scale: 1.1;
+}
+.services *::-moz-selection {
+  color: var(--selection-color);
+}
+.services *::selection {
+  color: var(--selection-color);
+}
+
+@media screen and (width > 400px) {
+  .services__detail-wrapper {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  .services__wrapper {
+    display: flex;
+    flex-direction: column;
+    place-items: flex-start;
+    place-content: center;
+  }
+  .services__title, .services__desc {
+    width: 50%;
+    padding-inline: 1rem 0;
+  }
+}
+@media screen and (width > 1000px) {
+  .services__wrapper {
+    padding-block: 2em;
+  }
+  .services__title {
+    font-size: 48px;
+  }
+  .services__desc {
+    font-size: 28px;
+  }
+}/*# sourceMappingURL=services.css.map */

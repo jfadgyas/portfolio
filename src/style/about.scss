@@ -1,0 +1,90 @@
+@import 'common';
+
+.about{
+    @include section(url('../style/img/mecoding.jpeg'));
+    &__detail,
+    &__link{
+        display: flex;
+        gap: 0.5em;
+        transition: 300ms;
+        scale: 0;
+    }
+    &__link{
+        @extend %link;
+    }
+    &__icon{
+        @include icon;
+    }
+}
+
+.skills,
+.numbers{
+    width: 300px;
+    margin: 0 auto;
+    &__list{
+        @extend %list;
+        display: flex;
+        gap: 0.8em;
+        flex-wrap: wrap;
+    }
+    &__item{
+        display: flex;
+        flex-direction: column;
+        place-items: center;
+        place-content: center;
+        width: 5.6em;
+        padding: 0.4em 0 0 0;
+        transition: 300ms;
+        scale: 0;
+    }
+    &__icon{
+        width: 1.6em;
+        color: var(--accent-color);
+    }
+}
+
+.numbers{
+    &__number{
+        color: var(--accent-color);
+        font-size: 28px;
+        font-weight: bold;
+    }
+    &__detail{
+        text-transform: capitalize;
+        text-align: center;
+    }
+}
+
+.card__item.hover{
+    & .skills__item,
+    & .numbers__item,
+    & .about__detail,
+    & .about__link{
+        @for $itemCount from 1 to 10{
+            &:nth-child(#{$itemCount}){
+                transition-delay: $itemCount * 100ms;
+                scale: 1;
+            }
+        }
+    }
+}
+
+@media screen and (width > 400px) {
+    .about{
+        @include media(flex-start, 400);
+    }
+}
+
+@media screen and (width > 1000px) {
+    .about{
+        &__wrapper{
+            padding-block: 2em;
+        }
+        &__title{
+            font-size: 48px;
+        }
+        &__desc{
+            font-size: 28px;
+        }
+    }
+}
