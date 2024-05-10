@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 
 import Icon from '@mdi/react';
 import { 
@@ -8,26 +8,34 @@ import {
     mdilMapMarker,
     mdilMessageText,
     mdilArrowRightCircle,
-    // mdilCheck,
-    // mdilThumbUp
+    mdilThumbUp,
+    mdilThumbDown
 } from '@mdi/light-js'
 
 import '../style/contact.css'
+import PostForm from './PostForm'
+import Spinner from './Spinner'
+import RenderIf from './RenderIf'
+
+const MESSAGES = {
+    site: "I think it's time to set me up with a website. Let's discuss your vision and how we can bring it to life!",
+    test: "Let's ensure everything runs smoothly – time for testing! Are you available to discuss?",
+    database: "It's time to organize my data effectively. Shall we discuss setting up a database?",
+    dataentry: "Time to input my data. Ready to get started?",
+    documentation: "Let's document this code for clarity and ease of understanding. Ready to begin?",
+    animation: "Spice up your site with animation. Ready to add some flair?",
+    teaching: "Excited to dive into learning with you. Ready to get started?",
+    help: "I'm curious about your services and prices. Let's chat!",
+}
 
 const Contact = ({service}) => {
 
-    const inputRefs = useRef([])
+    const [status, setStatus] = useState({
+        result: '',
+        message: ''
+    })
+    const inputRefs = useRef([])    
 
-    const messages = {
-        site: "I think it's time to set me up with a website. Let's discuss your vision and how we can bring it to life!",
-        test: "Let's ensure everything runs smoothly – time for testing! Are you available to discuss?",
-        database: "It's time to organize my data effectively. Shall we discuss setting up a database?",
-        dataentry: "Time to input my data. Ready to get started?",
-        documentation: "Let's document this code for clarity and ease of understanding. Ready to begin?",
-        animation: "Spice up your site with animation. Ready to add some flair?",
-        teaching: "Excited to dive into learning with you. Ready to get started?",
-        help: "I'm curious about your services and prices. Let's chat!",
-    }
 
     // Focus goes to next field on Enter
     const handleKey = e => {
@@ -72,14 +80,25 @@ const Contact = ({service}) => {
 
     // Pass form data to the server
     const sendForm = () => {
-        
-        console.log(inputRefs.current)
-        // If form is valid => send 
-        // Popup, progress, stb
-        if (document.forms[0].checkValidity()) return console.log('Sending form, pupup, meg minden')
-        
+        // If form is valid => send
         // Otherwise validate fields
+        if (document.forms[0].checkValidity()){
+            return PostForm(Object.keys(MESSAGES), setStatus)
+        }
         inputRefs.current.map(field => validate(field)) // eslint map return value
+    }
+
+    // Handle button under form
+    const handleClick = () => {
+        status.message === '' && sendForm()
+        if (status.result === 'success'){
+            document.forms[0].reset()
+            setStatus({result: false, message: ''})
+        }
+        //form disabled, reset
+        if (status.result === 'error'){
+            setStatus({result: false, message: ''})
+        }
     }
 
     return (
@@ -170,7 +189,7 @@ const Contact = ({service}) => {
                             id='message'
                             name='message'
                             placeholder='Message'
-                            defaultValue={messages[service]}
+                            defaultValue={MESSAGES[service]}
                             required={true}
                             data-index='3'
                             ref={ref => inputRefs.current[3] ? ref : inputRefs.current.push(ref)}
@@ -180,12 +199,28 @@ const Contact = ({service}) => {
                         <span className='contact__error'>
                         </span>
                     </label>
+                    <input
+                        className='contact__input'
+                        id='subject'
+                        type='text'
+                        name='subject'
+                        placeholder='Subject'
+                        hidden={true}
+                        defaultValue={service}
+                    />
                     <button
-                        className='contact__button'
+                        className={`contact__button contact__button--${status.result}`}
                         type='button'
-                        onClick={() => sendForm()}>
-                        <Icon path={mdilArrowRightCircle} size={2} />
-                    </button>             
+                        onClick={() => handleClick()}>
+                        <Icon path={
+                            status.result === 'success' ? mdilThumbUp :
+                            status.result === 'error' ? mdilThumbDown : 
+                            mdilArrowRightCircle} size={2} />
+                    </button>
+                    <RenderIf isTrue={status.result === 'sending'}>
+                        <Spinner />
+                    </RenderIf>
+                    <div className={`contact__result contact__result--${status.result}`}>{status.message}</div>
                 </form>            
             </div>
         </section>

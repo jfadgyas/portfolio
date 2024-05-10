@@ -114,6 +114,23 @@
             color: var(--accent-color);
             cursor: pointer;
         }
+        &--success{
+            color: var(--success);
+        }
+        &--error{
+            color: var(--error);
+        }
+    }
+    &__result{
+        margin-left: 2.5em;
+        font-size: smaller;
+        text-align: center;
+        &--success{
+            color: var(--success);
+        }
+        &--error{
+            color: var(--error);
+        }
     }
 }
 

@@ -1,0 +1,42 @@
+.spinner {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  overflow: hidden;
+}
+.spinner__item {
+  width: 1em;
+  height: 1em;
+  background: #aed3f2;
+  scale: 0.5;
+  animation: send 1500ms infinite;
+}
+.spinner__item:nth-child(1) {
+  animation-delay: 0ms;
+}
+.spinner__item:nth-child(2) {
+  animation-delay: 100ms;
+}
+.spinner__item:nth-child(3) {
+  animation-delay: 200ms;
+}
+.spinner__item:nth-child(4) {
+  animation-delay: 300ms;
+}
+.spinner__item:nth-child(5) {
+  animation-delay: 400ms;
+}
+.spinner__item:nth-child(6) {
+  animation-delay: 500ms;
+}
+.spinner__item:nth-child(7) {
+  animation-delay: 600ms;
+}
+
+@keyframes send {
+  to {
+    scale: 1;
+    translate: 20em;
+  }
+}/*# sourceMappingURL=spinner.css.map */

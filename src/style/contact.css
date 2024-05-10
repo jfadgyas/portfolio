@@ -8,6 +8,8 @@
   --accent-color: coral;
   --extra-color: #d431ad;
   --selection-color: #8798B0;
+  --success: springgreen;
+  --error: #f44336;
 }
 
 body {
@@ -209,6 +211,23 @@ body {
 .contact__button:hover {
   color: var(--accent-color);
   cursor: pointer;
+}
+.contact__button--success {
+  color: var(--success);
+}
+.contact__button--error {
+  color: var(--error);
+}
+.contact__result {
+  margin-left: 2.5em;
+  font-size: smaller;
+  text-align: center;
+}
+.contact__result--success {
+  color: var(--success);
+}
+.contact__result--error {
+  color: var(--error);
 }
 
 @media screen and (width > 400px) {

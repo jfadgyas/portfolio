@@ -8,6 +8,8 @@
   --accent-color: coral;
   --extra-color: #d431ad;
   --selection-color: #8798B0;
+  --success: springgreen;
+  --error: #f44336;
 }
 
 body {
